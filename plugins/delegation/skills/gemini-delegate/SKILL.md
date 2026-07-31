@@ -1,6 +1,7 @@
 ---
 name: gemini-delegate
 description: Hand a task to Gemini CLI when its 2M-token context or multimodal input is a real advantage, and report the tokens saved. Use when analysing an entire repository or very large file set, processing a screenshot or video, fact-checking current docs on the web, driving a browser, or making a high-volume low-complexity refactor. Not for reasoning, planning, or ordinary edits.
+model-hint: sonnet
 ---
 
 # Gemini Delegation Skill

@@ -1,6 +1,7 @@
 ---
 name: openai-api
 description: Reference for the OpenAI API and SDKs - the Responses API, Chat Completions, streaming, tool calling, structured outputs, embeddings, and model or pricing selection. Use whenever OpenAI, GPT, the openai package, or an OpenAI model id appears in the task, and before answering any question about OpenAI model choice, cost, context limits, or API shape. Do not answer these from memory.
+model-hint: sonnet
 ---
 
 # OpenAI API

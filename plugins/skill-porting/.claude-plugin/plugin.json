@@ -1,0 +1,7 @@
+{
+  "name": "skill-porting",
+  "description": "Convert agent skills between Claude Code, OpenAI Codex, GitHub Copilot, and Gemini formats, and author skills that port cleanly.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["skills", "porting", "codex", "copilot", "gemini", "interop"]
+}

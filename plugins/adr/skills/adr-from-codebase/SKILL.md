@@ -1,6 +1,7 @@
 ---
 name: adr-from-codebase
 description: Reconstruct architectural decisions already embedded in an existing codebase and document them as ADRs. Use when adopting or inheriting a project with no decision records, when onboarding onto unfamiliar code, when asked to "document the architecture" or "backfill ADRs", or when a codebase choice keeps getting questioned because nobody wrote down why.
+model-hint: opus
 ---
 
 # ADR from an Existing Codebase

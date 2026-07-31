@@ -1,6 +1,7 @@
 ---
 name: api-contract-sync
 description: Keep a typed backend and its frontend client in sync by generating TypeScript types from an OpenAPI schema and failing CI when they drift. Use when frontend and backend types disagree, when adding an endpoint, when a runtime error comes from a response shape the client did not expect, or when setting up codegen for FastAPI, NestJS, or any OpenAPI-producing backend.
+model-hint: sonnet
 ---
 
 # API Contract Sync

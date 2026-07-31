@@ -1,6 +1,7 @@
 ---
 name: storybook-docs
 description: Master Storybook documentation for component development, design systems, and living documentation. Use when creating stories, autodocs, MDX documentation, or building comprehensive design system documentation.
+model-hint: sonnet
 ---
 
 # Storybook Documentation Mastery

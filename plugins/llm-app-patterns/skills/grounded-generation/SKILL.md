@@ -1,6 +1,7 @@
 ---
 name: grounded-generation
 description: Make an assistant answer only from supplied source material, refuse when the material does not cover the question, and cite what it used. Use when building a RAG assistant, a docs Q&A bot, or any feature where a confidently wrong answer is worse than no answer, and when adding citations or testing refusal behaviour.
+model-hint: opus
 ---
 
 # Grounded Generation

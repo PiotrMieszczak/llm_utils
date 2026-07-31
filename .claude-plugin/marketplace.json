@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Claude Code plugins for fullstack AI application development: staged workflow with gates, ADRs, doc-aware review and PR automation, LLM app patterns, API contract sync, and design fidelity.",
-    "version": "2.0.0"
+    "version": "3.0.0"
   },
   "plugins": [
     {
@@ -146,6 +146,41 @@
         "playwright"
       ],
       "category": "development"
+    },
+    {
+      "name": "claude-docs",
+      "source": "./plugins/claude-docs",
+      "description": "Write and audit agent-facing documentation on a progressive-disclosure model: a short CLAUDE.md of critical rules that routes to detail loaded only when needed.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "claude-md",
+        "documentation",
+        "audit",
+        "progressive-disclosure",
+        "context"
+      ],
+      "category": "documentation"
+    },
+    {
+      "name": "skill-porting",
+      "source": "./plugins/skill-porting",
+      "description": "Convert agent skills between Claude Code, OpenAI Codex, GitHub Copilot, and Gemini formats.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "skills",
+        "porting",
+        "codex",
+        "copilot",
+        "gemini",
+        "interop"
+      ],
+      "category": "productivity"
     }
   ]
 }

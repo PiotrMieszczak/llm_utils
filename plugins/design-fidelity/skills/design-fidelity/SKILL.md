@@ -1,6 +1,7 @@
 ---
 name: design-fidelity
 description: Verify an implemented UI matches its design spec - design-token compliance, responsive breakpoints, and interaction states. Use when reviewing UI code, after building a component from a design, when checking for hardcoded colors or spacing, when a design system is drifting, or when asked whether an implementation matches the design.
+model-hint: sonnet
 ---
 
 # Design Fidelity

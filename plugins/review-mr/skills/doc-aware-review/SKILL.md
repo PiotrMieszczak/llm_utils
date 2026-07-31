@@ -1,6 +1,7 @@
 ---
 name: doc-aware-review
 description: Review code against a repository's own documented standards - its ADRs, specs, and CLAUDE.md - rather than generic best practice. Use when reviewing a diff, auditing a branch before a pull request, checking whether a change violates an architectural decision, or when asked "does this follow our conventions". Invoked automatically by the /mr command.
+model-hint: opus
 ---
 
 # Doc-Aware Review

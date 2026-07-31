@@ -1,6 +1,7 @@
 ---
 name: adr-from-brainstorm
 description: Capture an architectural decision reached during a design or brainstorming conversation as an ADR. Use when a discussion has settled a technical choice - a stack, a boundary, a storage engine, a protocol, a deferral - and that choice should be recorded before it is forgotten or silently reversed. Also use when the user says "write this up as an ADR", "record this decision", or "add an ADR".
+model-hint: opus
 ---
 
 # ADR from a Brainstorming Session

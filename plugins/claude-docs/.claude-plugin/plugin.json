@@ -1,0 +1,7 @@
+{
+  "name": "claude-docs",
+  "description": "Write and audit agent-facing documentation on a progressive-disclosure model: a short CLAUDE.md of critical rules that routes to detail loaded only when needed.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["claude-md", "documentation", "audit", "progressive-disclosure", "context"]
+}

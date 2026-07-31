@@ -1,6 +1,7 @@
 ---
 name: frontend-design-notw
 description: Create distinctive, production-grade frontend interfaces using custom CSS, CSS Modules, or CSS-in-JS - never Tailwind. Use when building web components, pages, or applications in a project that forbids utility-class frameworks, or when a design calls for a bold, specific aesthetic that utility classes would flatten. Enforces a no-Tailwind rule and a list of generic-AI-aesthetic anti-patterns.
+model-hint: opus
 ---
 
 # Frontend Design Skill

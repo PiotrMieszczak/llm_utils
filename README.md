@@ -21,6 +21,8 @@ others:
 /plugin install frontend-toolkit@llm-utils
 /plugin install design-fidelity@llm-utils
 /plugin install api-contract-sync@llm-utils
+/plugin install claude-docs@llm-utils
+/plugin install skill-porting@llm-utils
 /plugin install delegation@llm-utils
 ```
 
@@ -74,6 +76,13 @@ writes commits and PR bodies with **no AI attribution anywhere**.
 | **`frontend-toolkit`** | `frontend-design-notw` (no Tailwind), `storybook-docs`, `ag-ui-expert` |
 | **`design-fidelity`** | Token compliance, responsive breakpoints, interaction states |
 
+### Documentation and interop
+
+| Plugin | Contents |
+|--------|----------|
+| **`claude-docs`** | `/claude-docs` — write a short routed CLAUDE.md, audit agent docs, strip boilerplate |
+| **`skill-porting`** | Convert skills to Codex, Copilot, or Gemini; `--check` validates frontmatter |
+
 ### Utility
 
 | Plugin | Skills |
@@ -98,6 +107,15 @@ check) consumes its marker before blocking, so it cannot loop.
 **Skills are as long as their content earns.** Orchestrators that delegate stay short;
 skills carrying real methodology run longer. Neither padding nor artificial compression.
 
+**Every skill declares a `model-hint`** (`opus` / `sonnet` / `haiku`) reflecting cognitive
+load — judgment, execution, or mechanical survey. The field is advisory: Claude Code does
+not read it, but it documents intent, drives subagent dispatch, and maps onto formats that
+do support model selection. See [docs/model-routing.md](docs/model-routing.md).
+
+**Progressive disclosure runs through everything.** A skill's description is read first and
+its body only when invoked; a `CLAUDE.md` should route to detail rather than contain it.
+The `claude-docs` plugin applies the same idea to project documentation.
+
 ## Repository layout
 
 ```
@@ -111,31 +129,13 @@ llm_utils/
     ├── frontend-toolkit/     3 skills
     ├── api-contract-sync/    1 skill
     ├── design-fidelity/      1 skill
+    ├── claude-docs/          commands/claude-docs.md, 2 skills, scripts
+    ├── skill-porting/        1 skill, scripts/port_skill.py
     └── delegation/           1 skill
 ```
 
-## Provenance
+## Credits
 
-`frontend-design-notw`, `storybook-docs`, `ag-ui-expert`, and `gemini-delegate` were
-migrated from a personal `.claude/skills` directory and audited on the way in:
-
-- Removed `execution_model` and `ultrathink` frontmatter keys — not valid Claude Code
-  skill fields, so they were silently ignored
-- Renamed `frontend-design` to `frontend-design-notw` to resolve a collision with the
-  built-in skill of that name
-- Rewrote descriptions that listed capabilities without a trigger condition
-- Made `ag-ui-expert`'s dependency on `gemini-delegate` optional and checked
-
-The ADR skills adapt
-[github/awesome-copilot](https://github.com/github/awesome-copilot/blob/main/skills/create-architectural-decision-record/SKILL.md).
-That original is a Copilot prompt using `${input:...}` substitution, which Claude Code does
-not interpret; the coded-bullet convention and frontmatter schema were kept, the input
-mechanism replaced with conversational elicitation.
-
-Two ideas are adapted from [mattpocock/skills](https://github.com/mattpocock/skills): the
-two-axis review separation (Standards vs Spec, never merged) and the router-command
-pattern behind `/flow`.
-
-Evaluated and **not** migrated, to avoid duplicating existing tools: `secops` (overlaps the
-built-in `/security-review`), `create-skill` (superseded by `superpowers:writing-skills`),
-and `github-speckit` (a wrapper around another tool's own documentation).
+- `/flow` is inspired by [mattpocock/skills](https://github.com/mattpocock/skills).
+- The `adr` skills are an adapted version of
+  [github/awesome-copilot](https://github.com/github/awesome-copilot/blob/main/skills/create-architectural-decision-record/SKILL.md).

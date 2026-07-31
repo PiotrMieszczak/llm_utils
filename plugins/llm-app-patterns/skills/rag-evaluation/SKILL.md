@@ -1,6 +1,7 @@
 ---
 name: rag-evaluation
 description: Measure whether a retrieval system actually finds the right material, before and after changing it. Use when building or debugging RAG, when deciding between keyword and vector search, when someone proposes adding embeddings, when answers are wrong and you need to know whether retrieval or generation is at fault, or when asked to evaluate search quality.
+model-hint: opus
 ---
 
 # RAG Evaluation
