@@ -1,0 +1,40 @@
+{
+  "name": "llm-utils",
+  "owner": {
+    "name": "Piotr Mieszczak",
+    "email": "mieszczak.piotr@gmail.com"
+  },
+  "metadata": {
+    "description": "Claude Code plugins: architectural decision records, frontend design and documentation, and task delegation.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "adr",
+      "source": "./plugins/adr",
+      "description": "Architectural Decision Records: capture decisions from a brainstorming session or reconstruct them from an existing codebase. Includes a hook that checks existing ADRs after design discussions.",
+      "version": "1.0.0",
+      "author": { "name": "Piotr Mieszczak" },
+      "keywords": ["adr", "architecture", "decisions", "documentation", "madr"],
+      "category": "documentation"
+    },
+    {
+      "name": "frontend-toolkit",
+      "source": "./plugins/frontend-toolkit",
+      "description": "Frontend work without Tailwind: distinctive interface design using custom CSS, Storybook component documentation, and AG-UI protocol expertise.",
+      "version": "1.0.0",
+      "author": { "name": "Piotr Mieszczak" },
+      "keywords": ["frontend", "design", "css", "storybook", "ag-ui", "components"],
+      "category": "development"
+    },
+    {
+      "name": "delegation",
+      "source": "./plugins/delegation",
+      "description": "Delegate large-context, multimodal, and bulk-refactoring work to Gemini CLI, with token savings reported.",
+      "version": "1.0.0",
+      "author": { "name": "Piotr Mieszczak" },
+      "keywords": ["gemini", "delegation", "context", "tokens"],
+      "category": "productivity"
+    }
+  ]
+}

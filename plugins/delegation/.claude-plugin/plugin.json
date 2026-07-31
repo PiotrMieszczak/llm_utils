@@ -1,0 +1,7 @@
+{
+  "name": "delegation",
+  "description": "Delegate large-context, multimodal, and bulk-refactoring work to Gemini CLI, with token savings reported.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["gemini", "delegation", "context", "tokens"]
+}

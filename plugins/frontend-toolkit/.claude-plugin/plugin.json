@@ -1,0 +1,7 @@
+{
+  "name": "frontend-toolkit",
+  "description": "Frontend work without Tailwind: distinctive interface design using custom CSS, Storybook component documentation, and AG-UI protocol expertise.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["frontend", "design", "css", "storybook", "ag-ui", "components"]
+}
