@@ -1,6 +1,6 @@
 ---
 name: ag-ui-expert
-description: Expert guidance on AG-UI protocol for building agentic applications - architectural decisions, event-driven patterns, SDK implementation (TypeScript & Python), state management, and integration strategies. Consults official documentation when needed.
+description: Guidance on the AG-UI protocol for connecting AI agents to user interfaces - event streams, state snapshots and deltas, transports, and the TypeScript and Python SDKs. Use when AG-UI, @ag-ui/core, or ag-ui-protocol appears in the task, when designing agent-to-frontend event flow, when deciding between AG-UI and MCP, A2A, or plain REST, or when debugging agent event streaming and state synchronisation.
 ---
 
 # AG-UI Protocol Expert

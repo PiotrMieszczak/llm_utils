@@ -1,0 +1,7 @@
+{
+  "name": "llm-app-patterns",
+  "description": "Patterns for building AI-powered applications: retrieval evaluation, grounded generation with citations, and streaming UI over SSE.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["llm", "rag", "retrieval", "grounding", "streaming", "sse", "evaluation"]
+}

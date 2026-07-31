@@ -1,6 +1,6 @@
 ---
 name: gemini-delegate
-description: Delegate tasks to Gemini CLI for large context ingestion (2M+ tokens), screenshot/video processing, web browsing, browser automation, and bulk refactoring. Track token savings.
+description: Hand a task to Gemini CLI when its 2M-token context or multimodal input is a real advantage, and report the tokens saved. Use when analysing an entire repository or very large file set, processing a screenshot or video, fact-checking current docs on the web, driving a browser, or making a high-volume low-complexity refactor. Not for reasoning, planning, or ordinary edits.
 ---
 
 # Gemini Delegation Skill

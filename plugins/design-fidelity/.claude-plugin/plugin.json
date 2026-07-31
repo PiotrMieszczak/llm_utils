@@ -1,0 +1,7 @@
+{
+  "name": "design-fidelity",
+  "description": "Verify an implemented UI against its design spec: design-token compliance, responsive breakpoint behaviour, and interaction states.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["design", "tokens", "css", "responsive", "playwright", "visual-regression"]
+}

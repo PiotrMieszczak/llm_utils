@@ -5,8 +5,8 @@
     "email": "mieszczak.piotr@gmail.com"
   },
   "metadata": {
-    "description": "Claude Code plugins: architectural decision records, frontend design and documentation, and task delegation.",
-    "version": "1.0.0"
+    "description": "Claude Code plugins for fullstack AI application development: staged workflow with gates, ADRs, doc-aware review and PR automation, LLM app patterns, API contract sync, and design fidelity.",
+    "version": "2.0.0"
   },
   "plugins": [
     {
@@ -14,8 +14,16 @@
       "source": "./plugins/adr",
       "description": "Architectural Decision Records: capture decisions from a brainstorming session or reconstruct them from an existing codebase. Includes a hook that checks existing ADRs after design discussions.",
       "version": "1.0.0",
-      "author": { "name": "Piotr Mieszczak" },
-      "keywords": ["adr", "architecture", "decisions", "documentation", "madr"],
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "adr",
+        "architecture",
+        "decisions",
+        "documentation",
+        "madr"
+      ],
       "category": "documentation"
     },
     {
@@ -23,8 +31,17 @@
       "source": "./plugins/frontend-toolkit",
       "description": "Frontend work without Tailwind: distinctive interface design using custom CSS, Storybook component documentation, and AG-UI protocol expertise.",
       "version": "1.0.0",
-      "author": { "name": "Piotr Mieszczak" },
-      "keywords": ["frontend", "design", "css", "storybook", "ag-ui", "components"],
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "frontend",
+        "design",
+        "css",
+        "storybook",
+        "ag-ui",
+        "components"
+      ],
       "category": "development"
     },
     {
@@ -32,9 +49,103 @@
       "source": "./plugins/delegation",
       "description": "Delegate large-context, multimodal, and bulk-refactoring work to Gemini CLI, with token savings reported.",
       "version": "1.0.0",
-      "author": { "name": "Piotr Mieszczak" },
-      "keywords": ["gemini", "delegation", "context", "tokens"],
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "gemini",
+        "delegation",
+        "context",
+        "tokens"
+      ],
       "category": "productivity"
+    },
+    {
+      "name": "review-mr",
+      "source": "./plugins/review-mr",
+      "description": "The /mr command: audit a branch against project docs and ADRs, fix findings, commit without AI attribution, and open a GitHub PR from the repository template.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "review",
+        "pull-request",
+        "adr",
+        "git",
+        "audit"
+      ],
+      "category": "development"
+    },
+    {
+      "name": "workflow-gates",
+      "source": "./plugins/workflow-gates",
+      "description": "Staged delivery workflow with hard gates: explore, PRD, spec, plan, tasks, implement, feedback, review, finalize. Enforces ADR-per-decision and living specs.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "workflow",
+        "gates",
+        "process",
+        "prd",
+        "spec",
+        "adr"
+      ],
+      "category": "productivity"
+    },
+    {
+      "name": "llm-app-patterns",
+      "source": "./plugins/llm-app-patterns",
+      "description": "Patterns for AI-powered apps: retrieval evaluation, grounded generation with citations, SSE streaming UI, and the OpenAI API.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "llm",
+        "rag",
+        "grounding",
+        "streaming",
+        "openai",
+        "evaluation"
+      ],
+      "category": "development"
+    },
+    {
+      "name": "api-contract-sync",
+      "source": "./plugins/api-contract-sync",
+      "description": "Keep a typed backend API and its frontend client in sync via OpenAPI codegen, with drift detection in CI.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "openapi",
+        "fastapi",
+        "typescript",
+        "codegen",
+        "contract"
+      ],
+      "category": "development"
+    },
+    {
+      "name": "design-fidelity",
+      "source": "./plugins/design-fidelity",
+      "description": "Verify an implemented UI against its design spec: token compliance, responsive breakpoints, and interaction states.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "design",
+        "tokens",
+        "css",
+        "responsive",
+        "playwright"
+      ],
+      "category": "development"
     }
   ]
 }

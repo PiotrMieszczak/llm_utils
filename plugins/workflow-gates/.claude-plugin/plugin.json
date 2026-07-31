@@ -1,0 +1,7 @@
+{
+  "name": "workflow-gates",
+  "description": "Staged delivery workflow with hard gates: exploration, PRD, spec, plan, tasks, implementation, feedback, review, finalize. Enforces ADR-per-decision and living specs.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["workflow", "gates", "process", "prd", "spec", "plan", "adr"]
+}

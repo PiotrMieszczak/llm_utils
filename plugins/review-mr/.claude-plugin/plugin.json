@@ -1,0 +1,7 @@
+{
+  "name": "review-mr",
+  "description": "The /mr command: audit a branch against project docs and ADRs, fix findings, commit without AI attribution, and open a GitHub PR from the repository template.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["review", "pull-request", "merge-request", "adr", "git", "audit"]
+}

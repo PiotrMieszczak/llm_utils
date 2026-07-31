@@ -1,0 +1,7 @@
+{
+  "name": "api-contract-sync",
+  "description": "Keep a typed backend API and its frontend client in sync by generating the client from the OpenAPI schema and detecting drift in CI.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["openapi", "fastapi", "typescript", "codegen", "contract", "types"]
+}
