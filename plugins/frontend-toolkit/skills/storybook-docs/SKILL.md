@@ -1,370 +1,142 @@
 ---
 name: storybook-docs
-description: Master Storybook documentation for component development, design systems, and living documentation. Use when creating stories, autodocs, MDX documentation, or building comprehensive design system documentation.
+description: Write Storybook stories and component documentation that stay useful as a design system grows. Use when creating or reviewing stories, deciding which component states need covering, choosing between autodocs and MDX, organising a component library's documentation, or when a Storybook has become a wall of examples nobody reads.
 model-hint: sonnet
 ---
 
-# Storybook Documentation Mastery
+# Storybook Documentation
 
-Create comprehensive, living documentation for UI components using Storybook. Transform components into interactive documentation with stories, autodocs, and MDX pages.
+Stories are **executable documentation**. Their value is not that they render a component —
+it is that they pin the states a component can be in, so those states cannot silently break.
 
-## Core Philosophy
+This skill covers the judgement calls. For API detail — every control type, decorator
+argument, config option — read [storybook.js.org/docs](https://storybook.js.org/docs) or the
+`references/` files in this skill. Restating a framework's own reference inline goes stale
+and is worse than the source.
 
-Storybook enables **living documentation**—interactive documentation that stays in sync with components. Stories capture component states, autodocs generate documentation automatically, and MDX provides flexible narrative documentation.
+## What deserves a story
 
-## When to Use This Skill
+The most common failure is a Storybook full of examples that all look the same: one happy
+path per component, nothing else.
 
-Activate when user mentions:
-- "storybook" or "stories"
-- Component documentation or design systems
-- "autodocs" or "MDX"
-- Writing component examples or documentation
-- Building UI component libraries
-- Testing component states and interactions
+Cover states that **differ in behaviour**, not just appearance:
 
-## Supported Frameworks
+| State | Why it matters |
+|-------|----------------|
+| Default | The baseline |
+| Each variant | `primary`, `secondary`, `ghost` — one story each |
+| **Empty** | What a new user sees before data exists. Almost always missing |
+| **Loading** | Async feedback; frequently unstyled because nobody looked |
+| **Error** | Failure often renders as nothing at all |
+| **Disabled** | Frequently styled but still clickable |
+| Edge content | Long labels, missing images, overflowing text |
 
-React, Vue, Angular, Svelte, Solid, Web Components, and others. Documentation examples use React syntax but apply to all frameworks.
+**Empty, loading, and error earn their place.** They are the states nobody opens the app to
+check, and the ones users hit first when something goes wrong.
 
-## Core Concepts
+The test: **would a reviewer notice if this state broke?** If a state is only reachable
+through three clicks in the running app, the story is the only place it will ever be seen.
 
-### Component Story Format (CSF)
+## Autodocs or MDX
 
-Stories capture rendered states of UI components:
+| Use | When |
+|-----|------|
+| **Autodocs** | The props explain themselves. The default choice |
+| **MDX** | The component needs prose — usage rules, composition guidance, do and don't |
 
-```typescript
-// Button.stories.ts
-const meta = {
-  component: Button,
-} satisfies Meta<typeof Button>;
+Autodocs is generated from stories and types, so it cannot drift on its own. MDX is
+hand-written and will. Reach for MDX only when the explanation cannot be expressed as a
+story, and expect to maintain it.
 
-export default meta;
+A `Button` needs autodocs. A `DataTable` with six composition patterns and rules about when
+to paginate needs MDX.
 
-type Story = StoryObj<typeof meta>;
+## Stories that survive
 
-export const Primary: Story = {
-  args: {
-    variant: 'primary',
-    label: 'Button',
-  },
-};
+**Args, not hardcoded props.** Args are why controls work, why stories compose, and why a
+change to defaults propagates.
+
+```tsx
+// works with controls, reusable
+export const Primary: Story = { args: { variant: "primary", label: "Save" } };
+
+// a screenshot with extra steps
+export const Primary = () => <Button variant="primary" label="Save" />;
 ```
 
-**Key elements**:
-- Default export (meta): component metadata
-- Named exports: individual story states
-- Args: component inputs for that state
+**No hooks for story state.** Component state belongs in the component. A story reaching for
+`useState` usually means the component should accept that state as a prop — the story just
+found a design problem.
 
-### Autodocs
+**Name for the state, not the appearance.** `Disabled` and `WithLongLabel` say what is being
+tested. `Example2` and `BlueVersion` do not.
 
-Automatic documentation generation from stories:
+**Compose from a base story** when a variant differs by one prop, so changes propagate
+instead of being copied.
 
-```typescript
-const meta = {
-  component: Button,
-  tags: ['autodocs'], // Enable autodocs
-} satisfies Meta<typeof Button>;
-```
+## Organisation
 
-Generates documentation page with:
-- Description and source code
-- Args table (component props)
-- Controls (interactive playground)
-- All stories for the component
+Colocate stories with components (`Button/Button.stories.tsx`). Separate directories drift
+apart and make deletion incomplete.
 
-### MDX Documentation
-
-Flexible narrative documentation combining Markdown and JSX:
-
-```mdx
-import { Meta, Canvas, Controls, Stories } from '@storybook/addon-docs/blocks';
-import * as ButtonStories from './Button.stories';
-
-<Meta of={ButtonStories} />
-
-# Button
-
-Buttons trigger actions.
-
-<Canvas of={ButtonStories.Primary} />
-<Controls of={ButtonStories} />
-
-## Usage
-
-Use buttons for primary actions in your interface.
-```
-
-**Best for**: Complex component explanations, design guidelines, usage patterns.
-
-### Controls
-
-Dynamic UI for exploring component states without coding:
-
-```typescript
-const meta = {
-  component: Button,
-  argTypes: {
-    variant: {
-      options: ['primary', 'secondary', 'danger'],
-      control: 'radio',
-    },
-    size: {
-      options: ['small', 'medium', 'large'],
-      control: 'select',
-    },
-  },
-} satisfies Meta<typeof Button>;
-```
-
-**Benefits**:
-- Test component states interactively
-- Explore edge cases dynamically
-- Generate new stories from control states
-
-### Actions
-
-Test event handlers and callbacks:
-
-```typescript
-import { fn } from '@storybook/test';
-
-const meta = {
-  component: Button,
-  args: {
-    onClick: fn(), // Spy function
-  },
-} satisfies Meta<typeof Button>;
-```
-
-When button is clicked, action appears in Actions panel with arguments.
-
-## Documentation Workflow
-
-### 1. Write Stories First
-
-Create comprehensive stories covering all component states:
-
-```typescript
-export const Primary: Story = {};
-export const Secondary: Story = {};
-export const Danger: Story = {};
-export const Disabled: Story = {};
-export const WithIcon: Story = {};
-export const LongText: Story = {};
-export const Small: Story = {};
-export const Large: Story = {};
-```
-
-**Goal**: Every component state, variant, and edge case has a story.
-
-### 2. Enable Autodocs
-
-Add `tags: ['autodocs']` to component meta:
-
-```typescript
-const meta = {
-  component: Button,
-  tags: ['autodocs'],
-} satisfies Meta<typeof Button>;
-```
-
-**Result**: Automatic documentation page with args tables, stories, and controls.
-
-### 3. Add MDX for Complex Components
-
-For components needing detailed explanation:
-
-```mdx
-import { Meta, Canvas, Controls } from '@storybook/addon-docs/blocks';
-
-<Meta title="Examples/Button" />
-
-# Button Component
-
-Buttons trigger actions. Use primary buttons for main actions.
-
-<Canvas of={ButtonStories.Primary} />
-
-## Best Practices
-
-- Use one primary button per section
-- Group related actions
-```
-
-### 4. Configure Controls
-
-Define which props are editable:
-
-```typescript
-const meta = {
-  component: Button,
-  argTypes: {
-    variant: { control: 'radio' },
-    size: { control: 'select' },
-    disabled: { control: 'boolean' },
-    onClick: { action: 'clicked' },
-  },
-} satisfies Meta<typeof Button>;
-```
-
-### 5. Test with Actions
-
-Verify event handlers work correctly:
-
-```typescript
-export const Clickable: Story = {
-  args: {
-    onClick: fn(),
-  },
-  play: async ({ canvasElement, userEvent }) => {
-    const button = canvasElement.querySelector('button');
-    await userEvent.click(button);
-    expect(onClick).toHaveBeenCalled();
-  },
-};
-```
-
-## Control Types
-
-| Data Type | Control Types | Usage |
-|-----------|---------------|-------|
-| `boolean` | `boolean` | Toggle switch |
-| `number` | `number`, `range` | Numeric input, slider |
-| `string` | `text`, `color`, `date` | Text input, color picker, date picker |
-| `enum` | `radio`, `select`, `check` | Single/multiple selection |
-| `object` | `object` | JSON editor |
-
-## File Organization
+Group by **what a person is looking for**, not by internal structure:
 
 ```
-src/
-├── components/
-│   ├── Button/
-│   │   ├── Button.tsx
-│   │   ├── Button.stories.ts
-│   │   ├── Button.test.ts
-│   │   └── Button.css
-│   └── Form/
-│       ├── Form.tsx
-│       ├── Form.stories.ts
-│       └── Form.mdx        # Complex component documentation
+Design System / Foundations   tokens, typography, colour
+Design System / Components    Button, Input, Card
+Patterns                      composed, multi-component examples
 ```
 
-**Co-location**: Keep stories next to components.
+Someone opening Storybook wants a component by name or by job. A tree mirroring `src/`
+serves the author, not the reader.
 
-## Design System Documentation
+## Interaction tests
 
-### Component Categories
+A play function turns a story into a test that runs where the component is documented.
+Worth it for **multi-step interactions** — a form, a dialog flow, search-and-select. Not
+worth it for "the button renders"; the story already proves that.
 
-Organize components by function in sidebar:
+See `references/controls-and-actions.md` for the API.
 
-```typescript
-// Form.stories.ts
-const meta = {
-  component: Form,
-  title: 'Components/Forms/Form', // Sidebar grouping
-} satisfies Meta<typeof Form>;
-```
+## In a design system
 
-### Subcomponents
+Two rules matter more than the rest:
 
-Document related components together:
+**Every state the design spec claims gets a story.** Otherwise "we support a loading state"
+is a claim nobody can check.
 
-```typescript
-const meta = {
-  component: List,
-  subcomponents: { ListItem },
-} satisfies Meta<typeof List>;
-```
+**Stories use design tokens, never literals.** A story hardcoding `#E8B87A` documents a
+component that has already drifted. The `design-fidelity` skill covers enforcement.
 
-Autodocs shows both List and ListItem documentation.
+## Anti-patterns
 
-### Documentation Pages
+**One story per component.** Documents that it renders, nothing more.
 
-Create standalone MDX pages for guidelines:
+**Missing empty, loading, and error.** The states that matter most when things go wrong.
 
-```mdx
-<!-- design-system/GettingStarted.mdx -->
-import { Meta } from '@storybook/addon-docs/blocks';
+**MDX for simple components.** Hand-written prose that autodocs would have generated and
+kept current.
 
-<Meta title="Design System/Getting Started" />
+**Stories as a scratchpad.** Half-finished examples named `Test` and `Foo` accumulate and
+train people to distrust the whole Storybook.
 
-# Getting Started
+**Restating props in prose.** Autodocs generates that table from types; writing it again by
+hand guarantees the two disagree.
 
-Learn how to use our design system components...
-```
+## Reference
 
-## Best Practices
+Detail lives beside this file, loaded only when needed:
 
-### DO
+| File | Covers |
+|------|--------|
+| `references/writing-stories.md` | CSF structure, args, composition |
+| `references/autodocs-guide.md` | Autodocs setup and customisation |
+| `references/mdx-documentation.md` | MDX blocks and layout |
+| `references/controls-and-actions.md` | Control types, argTypes, play functions |
+| `references/best-practices.md` | Extended guidance |
+| `assets/story-templates.md` | Starting points |
+| `assets/documentation-checklist.md` | Review checklist |
 
-- **Write stories first** while building components
-- **Cover all states**: default, hover, active, disabled, error
-- **Use args** instead of React Hooks for story data
-- **Spread args** onto components: `<Button {...args} />`
-- **Reuse story data** across component hierarchies
-- **Name stories clearly**: Primary, Disabled, WithIcon
-- **Enable autodocs** for automatic documentation
-- **Add MDX** for complex components needing explanation
-
-### DON'T
-
-- Don't skip edge case stories (empty states, errors, loading)
-- Don't use Hooks for component state in stories
-- Don't hardcode props without using args
-- Don't create stories without autodocs
-- Don't write MDX for simple components (autodocs suffices)
-- Don't forget action handlers for interactive components
-- Don't mix component logic in story files
-
-## Testing Integration
-
-### Interaction Tests
-
-Test component behavior using play functions:
-
-```typescript
-export const SubmitForm: Story = {
-  play: async ({ canvasElement, userEvent }) => {
-    const canvas = within(canvasElement);
-    await userEvent.type(canvas.getByLabelText('Email'), 'test@example.com');
-    await userEvent.click(canvas.getByRole('button'));
-    await expect(canvas.getByText('Success')).toBeInTheDocument();
-  },
-};
-```
-
-### Visual Regression Tests
-
-Combine Storybook with visual testing tools (Chromatic, Percy) to catch visual changes.
-
-## Supporting Resources
-
-- **Writing Stories**: See `references/writing-stories.md`
-- **Autodocs Guide**: See `references/autodocs-guide.md`
-- **MDX Documentation**: See `references/mdx-documentation.md`
-- **Controls & Actions**: See `references/controls-and-actions.md`
-- **Best Practices**: See `references/best-practices.md`
-- **Story Templates**: See `assets/story-templates.md`
-- **Quality Checklist**: See `assets/documentation-checklist.md`
-
-## Common Issues
-
-**Autodocs not appearing**: Add `tags: ['autodocs']` to component meta
-
-**Controls not working**: Add `component` to meta for automatic inference, or define argTypes manually
-
-**Actions not firing**: Use `fn()` from `@storybook/test` instead of automatic action matching
-
-**MDX parse errors**: Add blank lines between Markdown and JSX blocks
-
-**Stories not in sidebar**: Check file naming matches pattern `*.stories.@(js|jsx|ts|tsx)`
-
-## Official Resources
-
-- Storybook Docs: https://storybook.js.org/docs
-- Writing Stories: https://storybook.js.org/docs/writing-stories
-- Autodocs: https://storybook.js.org/docs/writing-docs/autodocs
-- MDX Format: https://storybook.js.org/docs/writing-docs/mdx
-- Controls: https://storybook.js.org/docs/essentials/controls
-- Actions: https://storybook.js.org/docs/essentials/actions
+Official: [Storybook docs](https://storybook.js.org/docs) ·
+[CSF](https://storybook.js.org/docs/api/csf) ·
+[Interaction testing](https://storybook.js.org/docs/writing-tests/interaction-testing)
