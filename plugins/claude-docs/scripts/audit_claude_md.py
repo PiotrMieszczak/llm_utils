@@ -124,6 +124,58 @@ def audit_skill(path: Path) -> list[str]:
     return problems
 
 
+ROLES = {"overview.md", "reference.md", "how-to.md"}
+# Directories under docs/ that are not topics and take no role files:
+# ADRs are immutable and cross-cutting; plans and specs are dated artifacts;
+# images and assets hold no prose.
+NON_TOPIC_DIRS = {"adr", "decisions", "plans", "specs", "rfcs",
+                  "images", "assets", "diagrams", "mocks"}
+
+
+def audit_docs_tree(root: Path) -> list[str]:
+    """Check docs/ topic structure: roles, index, and legacy layouts."""
+    findings: list[str] = []
+
+    if (root / "agents_docs").is_dir():
+        findings.append("agents_docs/ is legacy - fold into docs/ (one audience, one place)")
+
+    for docs_dir in [root / "docs", *sorted((root / "apps").glob("*/docs"))]:
+        if not docs_dir.is_dir():
+            continue
+        rel = docs_dir.relative_to(root)
+
+        if not (docs_dir / "README.md").exists():
+            findings.append(f"{rel}/: no README.md index - topics will be orphaned")
+
+        for topic in sorted(p for p in docs_dir.iterdir() if p.is_dir()):
+            # Dated or asset directories are not topics and take no roles.
+            if topic.name in NON_TOPIC_DIRS:
+                continue
+            if not any(f.suffix == ".md" for f in topic.iterdir() if f.is_file()):
+                continue                      # assets only - not a doc topic
+            present = {f.name for f in topic.iterdir() if f.is_file()}
+            if not present & ROLES:
+                findings.append(
+                    f"{rel}/{topic.name}/: no overview.md or reference.md "
+                    f"(has {', '.join(sorted(present)) or 'nothing'})"
+                )
+            # A stub how-to signals "incomplete" and discredits the directory.
+            howto = topic / "how-to.md"
+            if howto.exists() and howto.read_text(encoding="utf-8",
+                                                  errors="replace").count("\n") < 10:
+                findings.append(f"{rel}/{topic.name}/how-to.md: stub - delete or fill it")
+
+        # Loose .md at topic level suggests the split was never applied.
+        loose = [f.name for f in docs_dir.iterdir()
+                 if f.is_file() and f.suffix == ".md" and f.name != "README.md"]
+        if loose:
+            findings.append(
+                f"{rel}/: flat files not in a topic folder: {', '.join(sorted(loose)[:4])}"
+            )
+
+    return findings
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -147,12 +199,7 @@ def main() -> int:
             correctness += [f"{rel}: {x}" for x in c]
             cost += [f"{rel}: {x}" for x in k]
 
-        docs = [p for p in walk(root, "*.md")
-                if p.parent.name in {"agents_docs", "docs"} and p.name != "README.md"]
-        for p in sorted(docs):
-            n = p.read_text(encoding="utf-8", errors="replace").count("\n") + 1
-            if n > 100:
-                cost.append(f"{p.relative_to(root)}: {n} lines - consider splitting")
+        correctness += audit_docs_tree(root)
 
     for p in sorted(walk(root, "SKILL.md")):
         if problems := audit_skill(p):

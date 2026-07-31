@@ -17,12 +17,17 @@ only when relevant.
 Three tiers. Content belongs in the cheapest tier that can hold it.
 
 ```
-CLAUDE.md          always loaded      critical rules + a routing table
+CLAUDE.md              always loaded      critical rules + a routing table
    ↓ points to
-agents_docs/*.md   loaded when needed detail on one topic
+docs/<topic>/*.md      loaded when needed one role per file
    ↓ points to
-source, ADRs       loaded on demand   the actual truth
+source, ADRs           loaded on demand   the actual truth
 ```
+
+Tier 2 lives in **`docs/` at the repo root**, split by topic, with up to three roles per
+topic — `overview.md` (why), `reference.md` (exact facts), and an optional `how-to.md`
+(recipes). App-specific material goes in `apps/<name>/docs/` using the same pattern, and
+the root index routes into it. Full layout in `references/doc-structure.md`.
 
 The test for tier 1: **would violating this break something, in most sessions?** If not,
 it belongs in tier 2 with a pointer from tier 1.
@@ -72,11 +77,15 @@ The most valuable section, and the one most often missing:
 ```markdown
 | Topic | File |
 |-------|------|
-| Commands | `agents_docs/commands.md` |
-| Architecture | `agents_docs/architecture.md` |
-| Styling | `agents_docs/styling.md` |
+| Architecture | `docs/architecture/overview.md` |
+| Retrieval | `docs/retrieval/overview.md` |
+| Design tokens | `docs/design/reference.md` |
 | Decisions | `docs/adr/` |
+| Backend internals | `apps/api/docs/` |
 ```
+
+Point at the **role** a reader needs, not just the topic. Someone looking up a token wants
+`design/reference.md`; sending them to a topic folder makes them guess.
 
 This is what makes the short file work. It does not need to *contain* the architecture; it
 needs the agent to know where to look. Progressive disclosure fails without it — you get a
@@ -95,8 +104,8 @@ Three to six. The full list goes in tier 2.
 
 | Content | Where it goes |
 |---------|---------------|
-| Full directory tree | `agents_docs/architecture.md` |
-| Every available command | `agents_docs/commands.md` |
+| Full directory tree | `docs/architecture/overview.md` |
+| Every available command | `docs/<topic>/how-to.md` |
 | Coding style rules | linter config — enforce, do not document |
 | API documentation | generated, or `docs/` |
 | Why a decision was made | an ADR |
@@ -125,21 +134,50 @@ under a minute, it does not belong in a file loaded every turn.
 
 ## Structuring tier 2
 
-Split by **topic**, matching how questions arrive:
+All project documentation lives in **`docs/` at the repo root**, split by topic. Each topic
+holds up to three files, separated because they decay at different rates:
 
 ```
-agents_docs/
-├── architecture.md    structure, boundaries, data flow
-├── commands.md        the full command surface
-├── styling.md         design tokens, CSS conventions
-└── resources.md       external links, dashboards, references
+docs/
+├── README.md                index + routing
+├── adr/                     decisions — immutable, cross-cutting
+├── retrieval/
+│   ├── overview.md          why it works this way        (decays slowly)
+│   ├── reference.md         schemas, params, fields      (decays fast)
+│   └── how-to.md            recipes — optional
+└── design/
+    ├── overview.md
+    └── reference.md         tokens, breakpoints
 ```
 
-Each file: **20–60 lines**, one topic, self-contained. If one passes ~100 lines, split it
-or push detail down to tier 3.
+`how-to.md` exists **only** when a topic has recurring procedures. Files exist because a
+topic needs them, never to complete a template — an empty `how-to.md` permanently signals
+"incomplete" and trains people to ignore the directory.
 
-Name files after the question they answer. `styling.md` is found when someone asks about
-styling; `frontend-guidelines-v2.md` is not.
+App-specific documentation goes in `apps/<name>/docs/` using the same pattern. The root
+index routes into it; nothing is duplicated across the two.
+
+Name topics after **the question someone arrives with** — `retrieval/`, `design/`,
+`deployment/`. Not `utils/` or `misc/`; nobody asks "how does utils work?"
+
+Full detail, including why tutorials are omitted from the pattern, in
+`references/doc-structure.md`.
+
+## Migrating from `agents_docs/`
+
+Projects that kept a separate `agents_docs/` should fold it into `docs/`. The split assumes
+agent-facing and human-facing documentation are different things; they are not, and
+maintaining both guarantees one goes stale.
+
+1. Map each existing file to a topic and a role — `architecture.md` becomes
+   `docs/architecture/overview.md`, `styling.md` usually splits into
+   `docs/design/overview.md` plus `docs/design/reference.md` (tokens are reference).
+2. `git mv` so history follows the content.
+3. Update the `CLAUDE.md` routing table and `docs/README.md`.
+4. Verify every link resolves before removing the old directory.
+
+Splitting one file into overview and reference is the step that adds value: the mixed file
+could not be audited, because you could not tell which half was supposed to match the code.
 
 ## Nested CLAUDE.md
 
@@ -151,8 +189,8 @@ to update — which become inconsistent.
 
 ## Process
 
-1. **Read what exists** — the current `CLAUDE.md`, plus any `agents_docs/`, `README`, or
-   `docs/`. Never rewrite unread.
+1. **Read what exists** — the current `CLAUDE.md`, plus `docs/`, `README`, and any legacy
+   `agents_docs/`. Never rewrite unread.
 2. **Inventory the claims.** For each, ask: critical and non-obvious (tier 1), topical
    detail (tier 2), or already-in-the-code (delete)?
 3. **Verify before keeping.** Rules go stale silently. Check that named files exist,
@@ -167,7 +205,7 @@ to update — which become inconsistent.
 ## Verification
 
 ```bash
-wc -l CLAUDE.md agents_docs/*.md
+wc -l CLAUDE.md docs/*/*.md
 grep -oE '`[^`]+\.(md|txt)`' CLAUDE.md | tr -d '`' | while read -r f; do
   [ -e "$f" ] || echo "BROKEN LINK: $f"
 done

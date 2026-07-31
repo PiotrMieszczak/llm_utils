@@ -14,12 +14,16 @@ Mode: `$ARGUMENTS` — `audit` (default), `write`, or `trim`.
 ## The model
 
 ```
-CLAUDE.md          always loaded      critical rules + routing table
+CLAUDE.md              always loaded      critical rules + routing table
    ↓
-agents_docs/*.md   loaded when needed one topic per file
+docs/<topic>/*.md      loaded when needed overview / reference / how-to
    ↓
-source, ADRs       loaded on demand   the truth
+source, ADRs           loaded on demand   the truth
 ```
+
+Tier 2 is `docs/` at the repo root, split by topic, with `overview.md` (why),
+`reference.md` (exact facts), and an optional `how-to.md` (recipes). App-specific material
+lives in `apps/<name>/docs/`; the root index routes into it.
 
 Content belongs in the cheapest tier that can hold it. `CLAUDE.md` is paid on **every
 turn**, so it should route to detail rather than contain it. Target 200–400 lines,
@@ -72,8 +76,9 @@ Follow the `writing-claude-md` skill. Five sections in tier 1, nothing else:
 4. **Documentation map** — the routing table that makes the short file work
 5. **Quick commands** — three to six
 
-Everything else moves to `agents_docs/<topic>.md`, 20–60 lines each, one topic per file,
-each linked from the routing table.
+Everything else moves to `docs/<topic>/`, split by role — `overview.md` for why,
+`reference.md` for exact facts, `how-to.md` only when the topic has recurring procedures.
+Every topic is linked from `docs/README.md` and from the `CLAUDE.md` routing table.
 
 **Read before rewriting.** Never replace a file you have not read — it may hold a
 hard-won rule whose reason is not obvious.
@@ -97,12 +102,16 @@ Remove from `CLAUDE.md`:
 Move, do not delete, anything that is real but detailed. Deleting content without a
 destination is data loss, not restructuring — say which you are doing.
 
+When moving, split by role. A styling document usually becomes `docs/design/overview.md`
+(principles) plus `docs/design/reference.md` (tokens). That split is what makes the
+reference half auditable against the code.
+
 ---
 
 ## Verify before reporting
 
 ```bash
-wc -l CLAUDE.md agents_docs/*.md
+wc -l CLAUDE.md docs/*/*.md
 grep -oE '`[^`]+\.md`' CLAUDE.md | tr -d '`' | while read -r f; do
   [ -e "$f" ] || echo "BROKEN LINK: $f"
 done

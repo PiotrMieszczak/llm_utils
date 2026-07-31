@@ -110,7 +110,7 @@ skills carrying real methodology run longer. Neither padding nor artificial comp
 **Every skill declares a `model-hint`** (`opus` / `sonnet` / `haiku`) reflecting cognitive
 load — judgment, execution, or mechanical survey. The field is advisory: Claude Code does
 not read it, but it documents intent, drives subagent dispatch, and maps onto formats that
-do support model selection. See [docs/model-routing.md](docs/model-routing.md).
+do support model selection. See [docs/model-routing/overview.md](docs/model-routing/overview.md).
 
 **Progressive disclosure runs through everything.** A skill's description is read first and
 its body only when invoked; a `CLAUDE.md` should route to detail rather than contain it.

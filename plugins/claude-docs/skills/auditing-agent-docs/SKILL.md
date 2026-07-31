@@ -1,6 +1,6 @@
 ---
 name: auditing-agent-docs
-description: Audit everything an agent reads - CLAUDE.md, agents_docs, skills, plugins, hooks - for staleness, bloat, broken links, and invalid frontmatter. Use when documentation feels out of date, when context is being wasted, when a skill never triggers, when checking a marketplace before publishing, or when asked to audit project or agent documentation.
+description: Audit everything an agent reads - CLAUDE.md, docs, skills, plugins, hooks - for staleness, bloat, broken links, and invalid frontmatter. Use when documentation feels out of date, when context is being wasted, when a skill never triggers, when checking a marketplace before publishing, or when asked to audit project or agent documentation.
 model-hint: opus
 ---
 
@@ -12,7 +12,7 @@ across four surfaces:
 | Surface | Failure mode |
 |---------|--------------|
 | `CLAUDE.md` | Bloat — loaded every turn |
-| `agents_docs/`, `docs/` | Staleness — describes code that changed |
+| `docs/`, `apps/*/docs/` | Staleness — describes code that changed |
 | Skills | Bad triggers, invalid frontmatter |
 | Plugins and hooks | Broken manifests, hooks that fail closed |
 
@@ -41,7 +41,7 @@ Then check **content**, not just size:
 grep -n "provides guidance to Claude Code\|claude.ai/code\|^You are\|best practices" CLAUDE.md
 
 # A routing table? Its absence is the main reason files grow.
-grep -c "agents_docs\|docs/" CLAUDE.md
+grep -c "docs/" CLAUDE.md
 
 # Links that no longer resolve
 grep -oE '`[^`]+\.(md|txt|json)`' CLAUDE.md | tr -d '`' | while read -r f; do
@@ -62,26 +62,42 @@ file describes aspirations rather than reality, which discredits the rules that 
 
 ## 2. Topic documentation
 
+Documentation lives in `docs/<topic>/` at the repo root and `apps/*/docs/<topic>/`, with up
+to three roles per topic: `overview.md`, `reference.md`, and an optional `how-to.md`.
+
 ```bash
-wc -l agents_docs/*.md docs/*.md 2>/dev/null | sort -n
+wc -l docs/*/*.md apps/*/docs/*/*.md 2>/dev/null | sort -n
 ```
 
-Check for:
+**Audit each role differently — that is the point of splitting them.**
 
-- **Oversized files** (>100 lines) — split, or push detail to source
-- **Orphans** — files nothing links to. Either link them or delete them
-- **Staleness** — do named paths, commands, and structures still exist?
+| File | Check | Why |
+|------|-------|-----|
+| `reference.md` | Aggressively, against the code | Trusted for exactness; wrong values mislead badly |
+| `how-to.md` | Do the steps still run? | Breaks silently when commands change |
+| `overview.md` | Lightly | Rationale is stable; churn here is noise |
 
 ```bash
-# Referenced paths that no longer exist
-grep -ohE '`[a-zA-Z0-9_./-]+/`?' agents_docs/*.md | tr -d '`' | sort -u | \
+# Referenced paths that no longer exist — worst in reference files
+grep -ohE '`[a-zA-Z0-9_./-]+/`?' docs/*/*.md 2>/dev/null | tr -d '`' | sort -u | \
   while read -r p; do [ -e "$p" ] || echo "MISSING: $p"; done
 ```
+
+Also check for:
+
+- **A missing index.** `docs/README.md` must list every topic. Without it, the
+  `CLAUDE.md` routing table is the only map and topics get orphaned.
+- **Orphans** — topic files nothing links to
+- **Legacy `agents_docs/`** — should be folded into `docs/`
+- **Duplication between root and app docs** — the same thing described twice will
+  disagree within a quarter
+- **Thin `how-to.md`** — a near-empty one signals "incomplete" and discredits the
+  directory. Delete it rather than leave a stub
 
 Documentation last touched long before the code it describes is a staleness signal:
 
 ```bash
-git log -1 --format="%ar" -- agents_docs/architecture.md
+git log -1 --format="%ar" -- docs/architecture/overview.md
 git log -1 --format="%ar" -- src/
 ```
 
@@ -161,19 +177,19 @@ stale documentation actively misleads, bloat merely wastes.
 ```
 CORRECTNESS  (misleading — fix first)
   CLAUDE.md:14   "Backend: Neo4j" — no Neo4j dependency in the project
-  agents_docs/architecture.md:8   references libs/chat-feature/, removed in 3f2a1b
+  docs/architecture/overview.md:8   references libs/chat-feature/, removed in 3f2a1b
   plugins/x/skills/y/SKILL.md   description has no trigger clause; will not fire
 
 COST  (wasteful)
   CLAUDE.md   612 lines, no routing table — the full command list and
-              directory tree belong in agents_docs/
+              directory tree belong in docs/architecture/
   CLAUDE.md:3 boilerplate "provides guidance to Claude Code (claude.ai/code)"
 
 INVALID  (silently ignored)
   skills/foo/SKILL.md   execution_model: sonnet — not a real field
 
 ORPHANED
-  agents_docs/old-setup.md   nothing links to it; last touched 8 months ago
+  docs/deployment/how-to.md   nothing links to it; last touched 8 months ago
 ```
 
 Fix correctness first. A stale rule causes wrong work; a long file causes slow work.
@@ -187,4 +203,4 @@ Ask of every line: **does the agent do something different because this is here?
 it is decoration regardless of length.
 
 Equally, do not recommend deleting content without a destination. Moving detail to
-`agents_docs/` is restructuring; deleting it is data loss. Say which you are proposing.
+`docs/<topic>/` is restructuring; deleting it is data loss. Say which you are proposing.
