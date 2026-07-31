@@ -1,6 +1,6 @@
 ---
 name: workflow-gates
-description: A staged delivery workflow with hard gates - explore, PRD, spec, plan, tasks, implement, feedback, review, finalize. Use when starting a feature that needs structured progression, when asked about stage gates or "bramki", when checking whether work may advance to the next stage, or when setting a PRD, spec, or plan status.
+description: A staged delivery workflow with hard gates - explore, PRD, spec, plan, tasks, implement, feedback, review, finalize. Use when starting a feature that needs structured progression, when asked about stage gates, when checking whether work may advance to the next stage, or when setting a PRD, spec, or plan status.
 model-hint: opus
 ---
 

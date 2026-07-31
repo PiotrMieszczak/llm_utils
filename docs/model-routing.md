@@ -81,9 +81,9 @@ Breadth over depth. Reading, listing, matching, extracting.
 
 `pdf-extraction` (the survey parts) · exploration passes · file inventories
 
-The workflow's stage 0 is explicitly `brak — zawsze zaczynaj tanio` ("no gate — always
-start cheap"). Exploration that costs little gets done; exploration that costs a lot gets
-skipped, and then plans rest on assumptions.
+The workflow's stage 0 has no gate by design — always start cheap. Exploration that costs
+little gets done; exploration that costs a lot gets skipped, and then plans rest on
+assumptions.
 
 ## Using the hints
 
