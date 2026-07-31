@@ -27,7 +27,7 @@ source, ADRs           loaded on demand   the actual truth
 Tier 2 lives in **`docs/` at the repo root**, split by topic, with up to three roles per
 topic — `overview.md` (why), `reference.md` (exact facts), and an optional `how-to.md`
 (recipes). App-specific material goes in `apps/<name>/docs/` using the same pattern, and
-the root index routes into it. Full layout in `references/doc-structure.md`.
+the root index routes into it. The `project-docs` plugin owns that pattern in full.
 
 The test for tier 1: **would violating this break something, in most sessions?** If not,
 it belongs in tier 2 with a pointer from tier 1.
@@ -160,8 +160,9 @@ index routes into it; nothing is duplicated across the two.
 Name topics after **the question someone arrives with** — `retrieval/`, `design/`,
 `deployment/`. Not `utils/` or `misc/`; nobody asks "how does utils work?"
 
-Full detail, including why tutorials are omitted from the pattern, in
-`references/doc-structure.md`.
+The full pattern — role definitions, topic naming, and why tutorials are omitted — is
+owned by the **`project-docs`** plugin. Install it for the writing and auditing skills;
+`CLAUDE.md` only needs to route into the structure, not define it.
 
 ## Migrating from `agents_docs/`
 

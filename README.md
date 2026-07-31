@@ -21,6 +21,7 @@ others:
 /plugin install frontend-toolkit@llm-utils
 /plugin install design-fidelity@llm-utils
 /plugin install api-contract-sync@llm-utils
+/plugin install project-docs@llm-utils
 /plugin install claude-docs@llm-utils
 /plugin install skill-porting@llm-utils
 /plugin install delegation@llm-utils
@@ -80,8 +81,14 @@ writes commits and PR bodies with **no AI attribution anywhere**.
 
 | Plugin | Contents |
 |--------|----------|
+| **`project-docs`** | `/docs` — write and audit project documentation: explanation, reference, optional how-to |
 | **`claude-docs`** | `/claude-docs` — write a short routed CLAUDE.md, audit agent docs, strip boilerplate |
 | **`skill-porting`** | Convert skills to Codex, Copilot, or Gemini; `--check` validates frontmatter |
+
+The two documentation plugins split by audience: **`project-docs`** is about whether the
+documentation is any good; **`claude-docs`** is about what the agent reads and what it
+costs. `claude-docs` decides *where* a fact belongs, `project-docs` whether it is written
+well.
 
 ### Utility
 
@@ -129,6 +136,7 @@ llm_utils/
     ├── frontend-toolkit/     3 skills
     ├── api-contract-sync/    1 skill
     ├── design-fidelity/      1 skill
+    ├── project-docs/         commands/docs.md, 4 skills, scripts/docs_tool.py
     ├── claude-docs/          commands/claude-docs.md, 2 skills, scripts
     ├── skill-porting/        1 skill, scripts/port_skill.py
     └── delegation/           1 skill

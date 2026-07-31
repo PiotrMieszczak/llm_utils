@@ -1,0 +1,7 @@
+{
+  "name": "project-docs",
+  "description": "Write and audit project documentation on the Diataxis model without tutorials: explanation, reference, and optional how-to, one topic per folder.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["documentation", "diataxis", "reference", "how-to", "explanation", "audit"]
+}
