@@ -25,6 +25,7 @@ others:
 /plugin install claude-docs@llm-utils
 /plugin install skill-porting@llm-utils
 /plugin install delegation@llm-utils
+/plugin install user-stories@llm-utils
 ```
 
 ## The workflow
@@ -58,6 +59,7 @@ Run `/flow` to ask which skill or stage fits your situation.
 | **`workflow-gates`** | `/flow` router, the staged workflow skill, and an advisory living-spec hook on commit |
 | **`review-mr`** | `/mr` — audit against your ADRs, fix, commit, open a PR. Plus `doc-aware-review` |
 | **`adr`** | `adr-from-brainstorm`, `adr-from-codebase`, and a hook that checks existing ADRs after design sessions |
+| **`user-stories`** | `user-stories` — minimal spec: need, scope, Gherkin criteria |
 
 **`/mr` in one line:** it reviews against *your repository's decisions* rather than generic
 best practice, reports on two axes (Standards vs Spec) so neither masks the other, and
@@ -139,7 +141,8 @@ llm_utils/
     ├── project-docs/         commands/docs.md, 4 skills, scripts/docs_tool.py
     ├── claude-docs/          commands/claude-docs.md, 2 skills, scripts
     ├── skill-porting/        1 skill, scripts/port_skill.py
-    └── delegation/           1 skill
+    ├── delegation/           1 skill
+    └── user-stories/         1 skill
 ```
 
 ## Credits

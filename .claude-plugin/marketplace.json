@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Claude Code plugins for fullstack AI application development: staged workflow with gates, ADRs, doc-aware review and PR automation, LLM app patterns, API contract sync, and design fidelity.",
-    "version": "3.1.0"
+    "version": "3.2.0"
   },
   "plugins": [
     {
@@ -197,6 +197,23 @@
         "how-to",
         "explanation",
         "audit"
+      ],
+      "category": "documentation"
+    },
+    {
+      "name": "user-stories",
+      "source": "./plugins/user-stories",
+      "description": "Turn a feature request into a minimal spec a developer can build from: the need, the scope boundary, and Gherkin acceptance criteria including the unhappy path.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Piotr Mieszczak"
+      },
+      "keywords": [
+        "spec",
+        "user-story",
+        "gherkin",
+        "acceptance-criteria",
+        "backlog"
       ],
       "category": "documentation"
     }

@@ -1,0 +1,15 @@
+{
+  "name": "user-stories",
+  "description": "Turn a feature request into a minimal spec a developer can build from: the need, the scope boundary, and Gherkin acceptance criteria including the unhappy path.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Piotr Mieszczak"
+  },
+  "keywords": [
+    "spec",
+    "user-story",
+    "gherkin",
+    "acceptance-criteria",
+    "backlog"
+  ]
+}
