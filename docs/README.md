@@ -3,6 +3,7 @@
 | Topic | What it covers |
 |-------|----------------|
 | [Model routing](model-routing/overview.md) | The `model-hint` field, what it does and does not do, and how to dispatch work by cognitive load |
+| [Third-party marketplaces](marketplaces/overview.md) | Other marketplaces worth knowing — Ponytail, Caveman — what they change and where they collide with this one |
 
 ## Layout
 
