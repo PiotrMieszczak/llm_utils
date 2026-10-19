@@ -97,6 +97,7 @@ well.
 | Plugin | Skills |
 |--------|--------|
 | **`delegation`** | `gemini-delegate` — hand large-context and multimodal work to Gemini CLI |
+| **`retro`** | `/retro` — retrospective on a session; suggests changes to the agent's environment |
 
 ## Conventions used here
 
@@ -142,6 +143,7 @@ llm_utils/
     ├── claude-docs/          commands/claude-docs.md, 2 skills, scripts
     ├── skill-porting/        1 skill, scripts/port_skill.py
     ├── delegation/           1 skill
+    ├── retro/                commands/retro.md
     └── user-stories/         1 skill
 ```
 
