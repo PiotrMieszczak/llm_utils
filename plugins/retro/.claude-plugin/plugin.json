@@ -1,0 +1,7 @@
+{
+  "name": "retro",
+  "description": "Run a retrospective on a coding session and suggest changes to the agent's environment: navigation pointers, automated checks, review rules, steering-file trimming.",
+  "version": "1.0.0",
+  "author": { "name": "Piotr Mieszczak" },
+  "keywords": ["retrospective", "retro", "agent-environment", "guardrails", "claude-md"]
+}
