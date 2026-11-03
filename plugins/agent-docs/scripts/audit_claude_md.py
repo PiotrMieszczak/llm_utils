@@ -23,10 +23,14 @@ from pathlib import Path
 
 SKIP_DIRS = {"node_modules", ".git", "dist", "build", ".next", "__pycache__", ".venv"}
 
-# Fields Claude Code actually reads from SKILL.md frontmatter.
-VALID_SKILL_FIELDS = {"name", "description", "allowed-tools", "disable-model-invocation"}
-# Marketplace convention, documented and consumed by skill-porting.
-TOLERATED_SKILL_FIELDS = {"model-hint"}
+# Fields Claude Code reads from SKILL.md frontmatter (code.claude.com/docs/en/skills).
+VALID_SKILL_FIELDS = {
+    "name", "description", "when_to_use", "argument-hint", "arguments",
+    "disable-model-invocation", "user-invocable", "allowed-tools", "disallowed-tools",
+    "model", "effort", "context", "agent", "background", "hooks", "paths", "shell",
+}
+# Agent Skills spec fields: accepted, not acted on.
+TOLERATED_SKILL_FIELDS = {"metadata", "license", "compatibility"}
 
 BOILERPLATE = [
     (r"provides guidance to Claude Code", "generic preamble - Claude knows what it reads"),

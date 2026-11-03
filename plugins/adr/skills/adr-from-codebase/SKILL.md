@@ -1,7 +1,7 @@
 ---
 name: adr-from-codebase
 description: Reconstruct architectural decisions already embedded in an existing codebase and document them as ADRs. Use when adopting or inheriting a project with no decision records, when onboarding onto unfamiliar code, when asked to "document the architecture" or "backfill ADRs", or when a codebase choice keeps getting questioned because nobody wrote down why.
-model-hint: opus
+effort: high
 ---
 
 # ADR from an Existing Codebase
@@ -14,7 +14,8 @@ over Postgres, or put a hard boundary between two modules, or pinned a dependenc
 old major version. The code is the evidence. The reasoning is missing, and you must
 reconstruct it honestly — including admitting when you cannot.
 
-For decisions reached in a live conversation, use `adr-from-brainstorm` instead.
+For decisions reached in a live conversation, write the ADR directly from the plan-mode
+plan or conversation, using the same template in `references/adr-template.md`.
 
 ## The core discipline
 
@@ -179,7 +180,7 @@ the gap is the deliverable; deciding what to do about it is the user's call.
 
 ## Writing standards
 
-Identical to `adr-from-brainstorm`: coded bullets (`CON-001`, `POS-001`, `NEG-001`,
+Coded bullets (`CON-001`, `POS-001`, `NEG-001`,
 `ALT-001`, `IMP-001`, `REF-001`), mandatory negative consequences, and specific rejection
 reasons.
 

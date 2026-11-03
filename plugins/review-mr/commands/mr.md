@@ -110,7 +110,9 @@ knowingly accepted.
 
 ### 1.4 Review the diff
 
-Check, in priority order:
+Generic correctness and security bugs are the built-in `/code-review` and
+`/security-review`'s job — run them separately if wanted. This pass checks the diff against
+the repository's own standards, in priority order:
 
 | Priority | Check |
 |----------|-------|
@@ -190,7 +192,8 @@ Rules:
   diff unreviewable.
 - Update documentation in the same pass when doc drift was found.
 - If a finding reveals a genuine architectural decision — not just a bug — that decision
-  needs an ADR. Invoke `adr-from-brainstorm` rather than silently encoding it.
+  needs an ADR. Write one (`docs/adr/`, same format as `adr-from-codebase`) rather than
+  silently encoding it.
 - If a fix is beyond the scope of this branch, say so and leave it out of the PR body's
   claims. Do not quietly skip it.
 

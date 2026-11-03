@@ -5,15 +5,15 @@
     "email": "mieszczak.piotr@gmail.com"
   },
   "metadata": {
-    "description": "Claude Code plugins for fullstack AI application development: staged workflow with gates, ADRs, doc-aware review and PR automation, LLM app patterns, API contract sync, and design fidelity.",
-    "version": "3.2.0"
+    "description": "Claude Code plugins for fullstack AI application development: ADRs, doc-aware review and PR automation, LLM app patterns, API contract sync, and agent/project documentation.",
+    "version": "4.0.0"
   },
   "plugins": [
     {
       "name": "adr",
       "source": "./plugins/adr",
-      "description": "Architectural Decision Records: capture decisions from a brainstorming session or reconstruct them from an existing codebase. Includes a hook that checks existing ADRs after design discussions.",
-      "version": "1.0.0",
+      "description": "Reconstruct architectural decisions already embedded in an existing codebase and record them as ADRs.",
+      "version": "2.0.0",
       "author": {
         "name": "Piotr Mieszczak"
       },
@@ -29,36 +29,18 @@
     {
       "name": "frontend-toolkit",
       "source": "./plugins/frontend-toolkit",
-      "description": "Frontend work without Tailwind: distinctive interface design using custom CSS, Storybook component documentation, and AG-UI protocol expertise.",
-      "version": "1.0.0",
+      "description": "Storybook component documentation and AG-UI protocol expertise for agent-connected UIs.",
+      "version": "2.0.0",
       "author": {
         "name": "Piotr Mieszczak"
       },
       "keywords": [
         "frontend",
-        "design",
-        "css",
         "storybook",
         "ag-ui",
         "components"
       ],
       "category": "development"
-    },
-    {
-      "name": "delegation",
-      "source": "./plugins/delegation",
-      "description": "Delegate large-context, multimodal, and bulk-refactoring work to Gemini CLI, with token savings reported.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Piotr Mieszczak"
-      },
-      "keywords": [
-        "gemini",
-        "delegation",
-        "context",
-        "tokens"
-      ],
-      "category": "productivity"
     },
     {
       "name": "review-mr",
@@ -76,24 +58,6 @@
         "audit"
       ],
       "category": "development"
-    },
-    {
-      "name": "workflow-gates",
-      "source": "./plugins/workflow-gates",
-      "description": "Staged delivery workflow with hard gates: explore, PRD, spec, plan, tasks, implement, feedback, review, finalize. Enforces ADR-per-decision and living specs.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Piotr Mieszczak"
-      },
-      "keywords": [
-        "workflow",
-        "gates",
-        "process",
-        "prd",
-        "spec",
-        "adr"
-      ],
-      "category": "productivity"
     },
     {
       "name": "llm-app-patterns",
@@ -131,25 +95,8 @@
       "category": "development"
     },
     {
-      "name": "design-fidelity",
-      "source": "./plugins/design-fidelity",
-      "description": "Verify an implemented UI against its design spec: token compliance, responsive breakpoints, and interaction states.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Piotr Mieszczak"
-      },
-      "keywords": [
-        "design",
-        "tokens",
-        "css",
-        "responsive",
-        "playwright"
-      ],
-      "category": "development"
-    },
-    {
-      "name": "claude-docs",
-      "source": "./plugins/claude-docs",
+      "name": "agent-docs",
+      "source": "./plugins/agent-docs",
       "description": "Write and audit agent-facing documentation on a progressive-disclosure model: a short CLAUDE.md of critical rules that routes to detail loaded only when needed.",
       "version": "1.0.0",
       "author": {
@@ -163,24 +110,6 @@
         "context"
       ],
       "category": "documentation"
-    },
-    {
-      "name": "skill-porting",
-      "source": "./plugins/skill-porting",
-      "description": "Convert agent skills between Claude Code, OpenAI Codex, GitHub Copilot, and Gemini formats.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Piotr Mieszczak"
-      },
-      "keywords": [
-        "skills",
-        "porting",
-        "codex",
-        "copilot",
-        "gemini",
-        "interop"
-      ],
-      "category": "productivity"
     },
     {
       "name": "project-docs",
@@ -197,23 +126,6 @@
         "how-to",
         "explanation",
         "audit"
-      ],
-      "category": "documentation"
-    },
-    {
-      "name": "user-stories",
-      "source": "./plugins/user-stories",
-      "description": "Turn a feature request into a minimal spec a developer can build from: the need, the scope boundary, and Gherkin acceptance criteria including the unhappy path.",
-      "version": "1.0.0",
-      "author": {
-        "name": "Piotr Mieszczak"
-      },
-      "keywords": [
-        "spec",
-        "user-story",
-        "gherkin",
-        "acceptance-criteria",
-        "backlog"
       ],
       "category": "documentation"
     },

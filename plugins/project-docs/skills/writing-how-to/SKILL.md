@@ -1,7 +1,7 @@
 ---
 name: writing-how-to
 description: Write the how-to.md for a documentation topic - tested recipes for tasks people repeat. Use when documenting a recurring procedure, when the same question keeps being asked, when onboarding steps live only in someone's head, or when deciding whether a topic needs a how-to file at all.
-model-hint: sonnet
+model: sonnet
 ---
 
 # Writing How-To

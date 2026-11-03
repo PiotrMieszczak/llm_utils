@@ -1,7 +1,7 @@
 ---
 name: auditing-docs
 description: Audit project documentation for role confusion, staleness, gaps, and orphans. Use when documentation feels out of date, when a doc set has grown organically without structure, before onboarding someone new, when checking whether reference material still matches the code, or when asked to review or reorganise documentation.
-model-hint: opus
+effort: high
 ---
 
 # Auditing Documentation

@@ -87,17 +87,12 @@ other's territory.
 That is a real difference in kind: a skill here fires on a trigger phrase and stops, while
 these persist across a whole session and shape work you did not think to scope.
 
-**Two collisions to know about:**
+**One collision to know about:**
 
-1. **Ponytail versus staged workflow.** The `workflow-gates` pipeline deliberately front-
-   loads PRD, spec and plan before code. Ponytail's first rung asks whether the thing needs
-   to exist at all. Used together the ladder belongs *inside* a stage, not as a reason to
-   skip a gate — otherwise G1–G3 become advisory.
-
-2. **Caveman versus `project-docs`.** Caveman explicitly exempts documentation and commits
+1. **Caveman versus `project-docs`.** Caveman explicitly exempts documentation and commits
    from compression, which is the correct boundary. A terse `overview.md` would fail the
    `auditing-docs` checks in this marketplace for the same reason it reads badly: prose for
    humans is not a token sink to optimise.
 
-**Neither declares `model-hint`.** They predate that convention and are not bound by it;
-see [model routing](../model-routing/overview.md) for why the field is advisory anyway.
+**Neither sets `model` or `effort`.** They run on whatever model the session uses; see
+[model routing](../model-routing/overview.md).

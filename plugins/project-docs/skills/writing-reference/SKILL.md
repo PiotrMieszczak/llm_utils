@@ -1,7 +1,7 @@
 ---
 name: writing-reference
 description: Write the reference.md for a documentation topic - the exact, complete, scannable facts. Use when documenting an API, schema, configuration keys, design tokens, event names, or CLI flags, when a reference has drifted from the code, or when a document meant for lookup has filled with narrative.
-model-hint: sonnet
+model: sonnet
 ---
 
 # Writing Reference

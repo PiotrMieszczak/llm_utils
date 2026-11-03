@@ -1,7 +1,7 @@
 ---
 name: ag-ui-expert
 description: Guidance on the AG-UI protocol for connecting AI agents to user interfaces - event streams, state snapshots and deltas, transports, and the TypeScript and Python SDKs. Use when AG-UI, @ag-ui/core, or ag-ui-protocol appears in the task, when designing agent-to-frontend event flow, when deciding between AG-UI and MCP, A2A, or plain REST, or when debugging agent event streaming and state synchronisation.
-model-hint: opus
+effort: high
 ---
 
 # AG-UI Protocol Expert
@@ -59,9 +59,7 @@ Activate when the user:
 
 ### 2. Assess Need for Official Documentation
 - For latest API changes, new features, or specific implementation details, consult official docs
-- Fetch them with WebFetch, or with the `gemini-delegate` skill if the `delegation`
-  plugin is installed (it is a separate plugin in this marketplace, not a dependency —
-  do not assume it is present):
+- Fetch them with WebFetch:
   - Official docs: https://docs.ag-ui.com/
   - TypeScript SDK: https://docs.ag-ui.com/sdk/js/core/overview
   - Python SDK: https://docs.ag-ui.com/sdk/python/core/overview
@@ -104,10 +102,7 @@ Activate when the user:
 
 ## Integration with Other Skills
 
-- **`frontend-design-notw`** (same plugin) when implementing AG-UI in UI components
 - **`storybook-docs`** (same plugin) when documenting AG-UI-connected components
-- **`gemini-delegate`** (`delegation` plugin, optional) for fetching large documentation
-  sets cheaply — check availability rather than assuming it
 - **Reference MCP/A2A expertise** when discussing protocol ecosystem integration
 
 ## Best Practices
@@ -130,5 +125,5 @@ Activate when the user:
 ## Notes
 
 - This skill has deep knowledge from AG-UI documentation fetched during creation
-- For real-time updates or specific version changes, delegate to gemini-delegate skill
+- For real-time updates or specific version changes, fetch the official docs
 - Focus on practical, production-ready guidance over theoretical discussions

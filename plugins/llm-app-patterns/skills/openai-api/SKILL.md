@@ -1,7 +1,7 @@
 ---
 name: openai-api
 description: Reference for the OpenAI API and SDKs - the Responses API, Chat Completions, streaming, tool calling, structured outputs, embeddings, and model or pricing selection. Use whenever OpenAI, GPT, the openai package, or an OpenAI model id appears in the task, and before answering any question about OpenAI model choice, cost, context limits, or API shape. Do not answer these from memory.
-model-hint: sonnet
+model: sonnet
 ---
 
 # OpenAI API
@@ -177,10 +177,10 @@ paid for a problem better solved by chunking.
 
 ## Cost control
 
-Verify current prices at <https://openai.com/api/pricing/> before quoting any figure. As of
-mid-2026, the flagship `gpt-5.5` was around **$5 per million input tokens** and **$30 per
-million output**, with cached input roughly a tenth of the input price — but treat that as
-a shape, not a quote.
+Verify current prices at <https://openai.com/api/pricing/> before quoting any figure — this
+file deliberately carries no numbers. Model names here (`gpt-5.5`) only illustrate the call
+shape; by late 2026 newer GPT-6-generation models were reported, so pick the id from the
+`/v1/models` list above, not from these examples.
 
 Two properties that hold regardless of the numbers:
 

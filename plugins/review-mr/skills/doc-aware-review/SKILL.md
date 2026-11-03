@@ -1,13 +1,15 @@
 ---
 name: doc-aware-review
 description: Review code against a repository's own documented standards - its ADRs, specs, and CLAUDE.md - rather than generic best practice. Use when reviewing a diff, auditing a branch before a pull request, checking whether a change violates an architectural decision, or when asked "does this follow our conventions". Invoked automatically by the /mr command.
-model-hint: opus
+effort: high
+context: fork
 ---
 
 # Doc-Aware Review
 
 Review a change against **what this repository has decided**, not against generic best
-practice.
+practice. For generic bugs and security issues, use the built-in `/code-review` and
+`/security-review`; this skill does not duplicate them.
 
 A generic reviewer says "consider adding error handling". A doc-aware reviewer says
 "ADR-0002 forbids LLM calls in the ingestion path, and `parse.py:88` adds one." The second
