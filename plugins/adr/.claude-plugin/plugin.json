@@ -1,7 +1,15 @@
 {
   "name": "adr",
-  "description": "Architectural Decision Records: capture decisions from a brainstorming session or reconstruct them from an existing codebase. Includes a hook that checks existing ADRs after design discussions.",
-  "version": "1.0.0",
-  "author": { "name": "Piotr Mieszczak" },
-  "keywords": ["adr", "architecture", "decisions", "documentation", "madr"]
+  "description": "Reconstruct architectural decisions already embedded in an existing codebase and record them as ADRs.",
+  "version": "2.0.0",
+  "author": {
+    "name": "Piotr Mieszczak"
+  },
+  "keywords": [
+    "adr",
+    "architecture",
+    "decisions",
+    "documentation",
+    "madr"
+  ]
 }

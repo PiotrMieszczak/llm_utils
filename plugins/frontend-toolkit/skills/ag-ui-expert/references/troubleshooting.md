@@ -726,7 +726,6 @@ class PerformanceMonitor {
 If issues persist after troubleshooting:
 
 1. **Check Official Documentation**
-   - Use gemini-delegate skill to fetch latest docs
    - https://docs.ag-ui.com/
 
 2. **Minimal Reproduction**

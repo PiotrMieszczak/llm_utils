@@ -1,7 +1,7 @@
 ---
 name: writing-explanation
 description: Write the overview.md for a documentation topic - the file that explains why a system works the way it does. Use when creating or revising a topic overview, when someone asks "why is it built like this", when onboarding material is needed, or when a document meant to explain has drifted into listing parameters.
-model-hint: opus
+effort: high
 ---
 
 # Writing Explanation

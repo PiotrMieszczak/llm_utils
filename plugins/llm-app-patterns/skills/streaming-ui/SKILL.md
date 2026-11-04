@@ -1,7 +1,7 @@
 ---
 name: streaming-ui
 description: Stream LLM responses to a browser over Server-Sent Events, including tool-call progress, citations, cancellation, and error handling mid-stream. Use when building a chat UI, adding token streaming, handling SSE in React, deciding between SSE and WebSockets, or debugging a stream that hangs, duplicates, or drops.
-model-hint: sonnet
+model: sonnet
 ---
 
 # Streaming UI

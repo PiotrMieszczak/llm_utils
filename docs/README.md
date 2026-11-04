@@ -2,12 +2,12 @@
 
 | Topic | What it covers |
 |-------|----------------|
-| [Model routing](model-routing/overview.md) | The `model-hint` field, what it does and does not do, and how to dispatch work by cognitive load |
+| [Model routing](model-routing/overview.md) | The `model` and `effort` skill fields, and how to dispatch work by cognitive load |
 | [Third-party marketplaces](marketplaces/overview.md) | Other marketplaces worth knowing — Ponytail, Caveman — what they change and where they collide with this one |
 
 ## Layout
 
-This repository follows the pattern the `claude-docs` plugin describes: documentation
+This repository follows the pattern the `agent-docs` plugin describes: documentation
 lives in `docs/`, split by topic, with up to three roles per topic — `overview.md` (why),
 `reference.md` (exact facts), and `how-to.md` (recipes, only when a topic has recurring
 procedures).

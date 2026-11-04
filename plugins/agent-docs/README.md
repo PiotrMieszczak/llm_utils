@@ -1,9 +1,9 @@
-# claude-docs
+# agent-docs
 
 Keep what the agent reads short, current, and routed.
 
 ```bash
-/plugin install claude-docs@llm-utils
+/plugin install agent-docs@llm-utils
 ```
 
 ## Progressive disclosure

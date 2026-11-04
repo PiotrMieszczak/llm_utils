@@ -1,7 +1,7 @@
 ---
 name: auditing-agent-docs
 description: Audit everything an agent reads - CLAUDE.md, docs, skills, plugins, hooks - for staleness, bloat, broken links, and invalid frontmatter. Use when documentation feels out of date, when context is being wasted, when a skill never triggers, when checking a marketplace before publishing, or when asked to audit project or agent documentation.
-model-hint: opus
+effort: high
 ---
 
 # Auditing Agent Docs
@@ -107,17 +107,16 @@ The frontmatter is the whole trigger mechanism, so errors there mean a skill sil
 never fires.
 
 ```bash
-# Fields Claude Code actually reads: name, description, allowed-tools,
-# disable-model-invocation. Anything else is ignored.
-for f in $(find . -name "SKILL.md" -not -path "*/node_modules/*"); do
-  awk '/^---$/{n++; next} n==1' "$f" | grep -oE "^[a-z-]+:" | tr -d ':' | \
-    grep -vE "^(name|description|allowed-tools|disable-model-invocation|model-hint)$" | \
-    sed "s|^|  $f ignores: |"
-done
+python3 scripts/audit_claude_md.py --skills .
 ```
 
-`execution_model`, `ultrathink`, `capabilities`, and `model` are the common invented
-fields. They look meaningful and do nothing.
+It flags any field outside the list Claude Code reads (`name`, `description`,
+`when_to_use`, `allowed-tools`, `model`, `effort`, `context`, `agent`, `paths`, … — see
+`VALID_SKILL_FIELDS` in the script). `execution_model`, `ultrathink`, `capabilities`, and
+`model-hint` are the common invented fields. They look meaningful and do nothing.
+
+Context cost and how often each skill actually fires are not this skill's job: run the
+built-in `/skill-doctor` for that, and `/doctor prompt-audit` for instruction quality.
 
 **Then check description quality** — the actual trigger condition:
 
@@ -132,11 +131,7 @@ failures.
 Also verify: `name` matches its directory, description is roughly 90–420 characters, and
 no `${input:...}` (Copilot syntax) survives outside code blocks.
 
-The `skill-porting` plugin's `--check` mode does all of this:
-
-```bash
-python3 scripts/port_skill.py --check path/to/**/SKILL.md
-```
+`scripts/audit_claude_md.py --skills` checks the trigger clause and length too.
 
 ## 4. Plugins and hooks
 

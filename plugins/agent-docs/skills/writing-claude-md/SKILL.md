@@ -1,7 +1,7 @@
 ---
 name: writing-claude-md
 description: Write or restructure a CLAUDE.md so it stays short and routes to detail instead of containing it. Use when creating a CLAUDE.md, when one has grown past a few hundred lines, when `/init` produced a bloated file, when asked to document a project for agents, or when project rules keep being ignored because they are buried.
-model-hint: sonnet
+model: sonnet
 ---
 
 # Writing CLAUDE.md

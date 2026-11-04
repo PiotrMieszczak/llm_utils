@@ -1,7 +1,7 @@
 ---
 name: storybook-docs
 description: Write Storybook stories and component documentation that stay useful as a design system grows. Use when creating or reviewing stories, deciding which component states need covering, choosing between autodocs and MDX, organising a component library's documentation, or when a Storybook has become a wall of examples nobody reads.
-model-hint: sonnet
+model: sonnet
 ---
 
 # Storybook Documentation
@@ -106,7 +106,7 @@ Two rules matter more than the rest:
 is a claim nobody can check.
 
 **Stories use design tokens, never literals.** A story hardcoding `#E8B87A` documents a
-component that has already drifted. The `design-fidelity` skill covers enforcement.
+component that has already drifted.
 
 ## Anti-patterns
 

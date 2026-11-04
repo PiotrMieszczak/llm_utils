@@ -1,29 +1,12 @@
 # frontend-toolkit
 
-Frontend design, component documentation, and AG-UI protocol expertise.
+Component documentation and AG-UI protocol expertise.
 
 ```bash
 /plugin install frontend-toolkit@llm-utils
 ```
 
 ## Skills
-
-### `frontend-design-notw`
-
-Distinctive, production-grade interfaces built with custom CSS, CSS Modules, or CSS-in-JS.
-
-**The `-notw` suffix means "no Tailwind."** The name avoids colliding with Claude Code's
-built-in `frontend-design` skill, and the suffix states the difference: this skill treats
-utility-class frameworks as disallowed, not merely discouraged.
-
-Covers aesthetic direction, typography beyond the default stacks, color systems with the
-60-30-10 rule, orchestrated motion, and spatial composition — plus an explicit
-anti-pattern list (generic fonts, blue-gradient palettes, predictable hero-then-three-columns
-layouts, default shadows).
-
-Use it when a project forbids utility classes, or when a design has a specific character
-that utility classes would flatten. For general design work with no such constraint, the
-built-in `frontend-design` is fine.
 
 ### `storybook-docs`
 
@@ -50,10 +33,7 @@ implementation, architectural decisions, and troubleshooting.
 
 ## How they fit together
 
-Building an agent-connected UI typically uses all three: `ag-ui-expert` for the protocol
-and event flow, `frontend-design-notw` for the interface, `storybook-docs` to document the
-components that result.
-
-`ag-ui-expert` can optionally use `gemini-delegate` from the `delegation` plugin to fetch
-large documentation sets cheaply. That is a soft reference — the skill checks rather than
-assumes, so `frontend-toolkit` works standalone.
+Building an agent-connected UI: `ag-ui-expert` for the protocol and event flow,
+`storybook-docs` to document the components that result. For the interface design itself
+use the official `frontend-design` plugin; the former no-Tailwind `frontend-design-notw`
+skill is in `archived/frontend-toolkit/`.

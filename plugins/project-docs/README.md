@@ -82,14 +82,14 @@ than absent.
 | `writing-how-to` | Writing `how-to.md` — and deciding whether the topic needs one |
 | `auditing-docs` | Role confusion, staleness, gaps, orphans |
 
-## Relationship to `claude-docs`
+## Relationship to `agent-docs`
 
 Different audiences, no overlap:
 
 | Plugin | Concern |
 |--------|---------|
-| **`claude-docs`** | What the agent reads and what it costs — CLAUDE.md size, routing tables, skill and hook audits |
+| **`agent-docs`** | What the agent reads and what it costs — CLAUDE.md size, routing tables, skill and hook audits |
 | **`project-docs`** | Whether the documentation is any good — roles, completeness, staleness |
 
-`claude-docs` decides *where* a fact belongs; `project-docs` decides whether it is
+`agent-docs` decides *where* a fact belongs; `project-docs` decides whether it is
 written well.
